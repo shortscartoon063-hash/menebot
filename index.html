@@ -1064,11 +1064,15 @@
                 return;
             }
             
-            if (!paymentMethod) {
-                withdrawStatus.textContent = 'দয়া করে একটি পেমেন্ট মাধ্যম নির্বাচন করুন।';
-                withdrawStatus.className = 'error-message';
-                return;
-            }
+if (!paymentMethod) {
+    withdrawStatus.textContent = 'মোটা করে একটি পছন্দ করা মাধ্যম নির্বাচন করুন।';
+    withdrawStatus.className = 'error-message';
+    return;
+}
+if (paymentMethod === 'bikash') {
+    withdrawStatus.textContent = 'বিকাশ মাধ্যমে উত্তোলন প্রক্রিয়া চলছে।';
+    withdrawStatus.className = 'success-message';
+}
             
             if (!phoneNumber || !/^01[3-9][0-9]{8}$/.test(phoneNumber)) {
                 withdrawStatus.textContent = 'দয়া করে একটি বৈধ বাংলাদেশী মোবাইল নম্বর লিখুন।';
@@ -1156,4 +1160,5 @@
     </script>
 </body>
 </html>
+
 
