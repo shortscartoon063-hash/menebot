@@ -541,7 +541,7 @@
             
             <div class="action-buttons">
                 <button class="btn btn-primary" id="watch-ad-btn" onclick="watchAd()">
-                    <i class="fas fa-play"></i> বিজ্ঞাপন দেখুন (২ টাকা)
+                    <i class="fas fa-play"></i> বিজ্ঞাপন দেখুন (০.৫০ টাকা)
                 </button>
                 <button class="btn btn-success" id="auto-ad-btn" onclick="startAutoAds()">
                     <i class="fas fa-robot"></i> স্বয়ংক্রিয় বিজ্ঞাপন
@@ -576,7 +576,7 @@
                     <div>আমন্ত্রিত: <strong id="referral-count">0</strong></div>
                     <div>আয়: <strong id="referral-earnings">0.00</strong> টাকা</div>
                 </div>
-                <p style="font-size: 14px; margin-bottom: 10px;">আপনার রেফারেল লিঙ্ক শেয়ার করুন এবং প্রতিটি বন্ধুর জন্য ৫ টাকা বোনাস পান!</p>
+                <p style="font-size: 14px; margin-bottom: 10px;">আপনার রেফারেল লিঙ্ক শেয়ার করুন এবং প্রতিটি বন্ধুর জন্য ২ টাকা বোনাস পান!</p>
                 <div class="referral-link-container">
                     <input type="text" id="referral-link" readonly>
                     <button id="copy-referral" onclick="copyReferralLink()">কপি</button>
@@ -1064,15 +1064,31 @@
                 return;
             }
             
-if (!paymentMethod) {
-    withdrawStatus.textContent = 'মোটা করে একটি পছন্দ করা মাধ্যম নির্বাচন করুন।';
-    withdrawStatus.className = 'error-message';
-    return;
-}
-if (paymentMethod === 'bikash') {
-    withdrawStatus.textContent = 'বিকাশ মাধ্যমে উত্তোলন প্রক্রিয়া চলছে।';
-    withdrawStatus.className = 'success-message';
-}
+<!-- পেমেন্ট মাধ্যম নির্বাচন করার জন্য ড্রপডাউন -->
+<label for="payment-method">পেমেন্ট মাধ্যম:</label>
+<select id="payment-method" name="payment-method" required>
+    <option value="">--পেমেন্ট মাধ্যম নির্বাচন করুন--</option>
+    <option value="bikash">বিকাশ</option>
+    <option value="bank">নগত</option>
+</select>
+
+<!-- JavaScript কোড -->
+<script>
+    // পেমেন্ট মাধ্যম নির্বাচন করার পরে মান সংগ্রহ
+    const paymentMethod = document.getElementById('payment-method').value;
+
+    // যদি পেমেন্ট মাধ্যম না দেওয়া থাকে
+    if (!paymentMethod) {
+        withdrawStatus.textContent = 'মোটা করে একটি পছন্দ করা মাধ্যম নির্বাচন করুন।';
+        withdrawStatus.className = 'error-message';
+        return;
+    }
+
+    // যদি বিকাশ নির্বাচন করা হয়
+    if (paymentMethod === 'bikash') {
+        withdrawStatus.textContent = 'বিকাশ মাধ্যমে উত্তোলন প্রক্রিয়া চলছে।';
+        withdrawStatus.className = 'success-message';
+    }
             
             if (!phoneNumber || !/^01[3-9][0-9]{8}$/.test(phoneNumber)) {
                 withdrawStatus.textContent = 'দয়া করে একটি বৈধ বাংলাদেশী মোবাইল নম্বর লিখুন।';
@@ -1160,5 +1176,6 @@ if (paymentMethod === 'bikash') {
     </script>
 </body>
 </html>
+
 
 
